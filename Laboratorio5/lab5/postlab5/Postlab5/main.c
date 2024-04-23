@@ -1,9 +1,11 @@
-/*
- * Prelab5.c
- *
- * Created: 15/04/2024 01:13:57 a. m.
- * Author : JAVG
- */ 
+/*;UNIVERSIDAD DEL VALLE DE GUATEMALA
+;IE2023: PROGRAMACIÓN DE MICROCONTROLADORES
+;Lab2.asm
+;AUTOR: Jose Andrés Velásquez Gacía
+;PROYECTO: postlab5
+;HARDWARE: ATMEGA328P
+;CREADO: 22/02/2024
+;ÚLTIMA MODIFICACIÓN: 22/02/2024 23:36*/
 
 #define F_CPU 16000000
 #include <avr/io.h>
