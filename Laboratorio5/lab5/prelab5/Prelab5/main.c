@@ -1,11 +1,11 @@
 /*;UNIVERSIDAD DEL VALLE DE GUATEMALA
-;IE2023: PROGRAMACIÓN DE MICROCONTROLADORES
+;IE2023: PROGRAMACIÃ“N DE MICROCONTROLADORES
 ;Lab2.asm
-;AUTOR: Jose Andrés Velásquez Gacía
-;PROYECTO: lab5
+;AUTOR: Jose AndrÃ©s VelÃ¡squez GacÃ­a
+;PROYECTO: prelab5
 ;HARDWARE: ATMEGA328P
-;CREADO: 12/02/2024
-;ÚLTIMA MODIFICACIÓN: 22/02/2024 23:36*/
+;CREADO: 22/02/2024
+;ÃšLTIMA MODIFICACIÃ“N: 22/02/2024 23:36*/
 
 #define F_CPU 16000000
 #include <avr/io.h>
@@ -21,22 +21,14 @@ void initADC(void);
 int main(void)
 {
 	cli();
-	DDRB |= (1 << PORTB2) | ( 1 << PORTB1) ;		//PB6 Salida
+	DDRB |= (1 << PORTB2) ;		//PB6 Salida
 	DDRC = 0;		//puestoc entradas
 	DDRD |= (1 << PORTD5);		//PB6 salida
 
-/*
-	TCCR0A = 0;
-	TCCR0B = 0;
-	
-	TCCR0A |= (1  << WGM00) | (1 << WGM01) ;
-	TCCR0A |= (1 << COM0B1);
-	*/
+
 	
 	initFastPWM0();
 	canal0();
-	//(((((((((((((((((((((((((((((((((((((((((((((((((((((((((
-	//Prescaler 1024
 	TCCR0B = 0x02;
 	
 	initFastPWM1(2, 8);
@@ -86,14 +78,4 @@ ISR (ADC_vect){
 		contador = 1;
 		ADMUX = (ADMUX & 0xF0);
 		salidaservo(ADCH, 1);
-	}else if(contador == 1){
-		contador = 2;
-		ADMUX = (ADMUX & 0xF0) | 0x01;
-		salidaservo(ADCH, 2);
-	}else if(contador == 2){
-		contador = 0;
-		ADMUX = (ADMUX & 0xF0) | 0x02;//converva 4bits y carga el canal de lectura act
-		OCR0B = ADCH;
 	}
-	ADCSRA |= (1 << ADSC);
-}
